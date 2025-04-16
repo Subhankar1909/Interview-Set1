@@ -5,6 +5,7 @@ import com.interview.pps.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
+        orderList = orderRepository.findAll();
         return orderList;
     }
 
@@ -43,5 +45,16 @@ public class OrderService {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://external-shipping-service/track?id=" + orderId;
         return restTemplate.getForObject(url, String.class);
+    }
+
+    public String getSummary() {
+        // Dummy logic with deliberate issues
+        int total = 0;
+        for (Order o : orderList) {
+            total += o.getQuantity();
+        }
+        LocalDateTime now = null; // Error 1: null used instead of proper date
+        String result = "Summary at " + now.toString() + ": " + total; // Error 2: NPE risk
+        return result;
     }
 }

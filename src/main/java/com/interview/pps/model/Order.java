@@ -5,6 +5,7 @@ public class Order {
     private int id;
     private String product;
     private int quantity;
+    private boolean isProcessed;
 
 
     public int getId() {
@@ -29,5 +30,13 @@ public class Order {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isProcessed() {
+        return isProcessed;
+    }
+
+    public void setProcessed(boolean processed) {
+        isProcessed = processed;
     }
 }
