@@ -53,8 +53,8 @@ public class OrderService {
         for (Order o : orderList) {
             total += o.getQuantity();
         }
-        LocalDateTime now = null; // Error 1: null used instead of proper date
-        String result = "Summary at " + now.toString() + ": " + total; // Error 2: NPE risk
+        LocalDateTime now = null;
+        String result = "Summary at " + now.toString() + ": " + total;
         return result;
     }
 }
