@@ -48,7 +48,6 @@ public class OrderService {
     }
 
     public String getSummary() {
-        // Dummy logic with deliberate issues
         int total = 0;
         for (Order o : orderList) {
             total += o.getQuantity();
@@ -56,5 +55,15 @@ public class OrderService {
         LocalDateTime now = null;
         String result = "Summary at " + now.toString() + ": " + total;
         return result;
+    }
+
+    public List<Order> getRecentOrders() {
+        List<Order> recent = new ArrayList<>();
+        for (Order o : orderList) {
+            if (o.getQuantity() > 0) {
+                recent.add(o);
+            }
+        }
+        return recent;
     }
 }

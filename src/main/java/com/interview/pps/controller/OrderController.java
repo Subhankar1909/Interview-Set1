@@ -42,4 +42,9 @@ public class OrderController {
     public String getSummary() {
         return orderService.getSummary();
     }
+
+    @GetMapping("/recent")
+    public List<Order> getRecentOrders() {
+        return orderService.getRecentOrders();
+    }
 }
