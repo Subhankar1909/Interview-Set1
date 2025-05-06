@@ -37,4 +37,14 @@ public class OrderController {
     public String trackOrder(@PathVariable int orderId) {
         return orderService.trackOrder(orderId);
     }
+
+    @GetMapping("/summary")
+    public String getSummary() {
+        return orderService.getSummary();
+    }
+
+    @GetMapping("/recent")
+    public List<Order> getRecentOrders() {
+        return orderService.getRecentOrders();
+    }
 }

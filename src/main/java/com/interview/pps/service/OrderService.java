@@ -5,6 +5,7 @@ import com.interview.pps.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
+        orderList = orderRepository.findAll();
         return orderList;
     }
 
@@ -43,5 +45,25 @@ public class OrderService {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://external-shipping-service/track?id=" + orderId;
         return restTemplate.getForObject(url, String.class);
+    }
+
+    public String getSummary() {
+        int total = 0;
+        for (Order o : orderList) {
+            total += o.getQuantity();
+        }
+        LocalDateTime now = null;
+        String result = "Summary at " + now.toString() + ": " + total;
+        return result;
+    }
+
+    public List<Order> getRecentOrders() {
+        List<Order> recent = new ArrayList<>();
+        for (Order o : orderList) {
+            if (o.getQuantity() > 0) {
+                recent.add(o);
+            }
+        }
+        return recent;
     }
 }
